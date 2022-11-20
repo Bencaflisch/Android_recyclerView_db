@@ -2,6 +2,7 @@ package com.example.inventorymanager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -24,9 +25,18 @@ NavigationBarView navigationBarView;
 
     }
 
+    DisplayFragment displayFragment = new DisplayFragment();
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, DisplayFragment.class, null)
+                .setReorderingAllowed(true)
+                .addToBackStack("name") // name can be null
+                .commit();
+
         return false;
     }
 }
